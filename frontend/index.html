@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ECOSIGNAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">GLOBAL ECOLOGICAL INTELLIGENCE PLATFORM</p>
+          <h1>ECOSIGNAL</h1>
+        </div>
+        <div class="status-pill" id="status-pill">Conectando</div>
+      </header>
+
+      <main class="dashboard">
+        <details open class="panel">
+          <summary>Estado del sistema</summary>
+          <div id="health-status" class="panel-body"></div>
+        </details>
+
+        <details open class="panel">
+          <summary>Ecosistemas soportados</summary>
+          <div id="ecosystems" class="panel-body"></div>
+        </details>
+
+        <details class="panel">
+          <summary>Conectores de datos</summary>
+          <div id="connectors" class="panel-body"></div>
+        </details>
+
+        <details class="panel">
+          <summary>Cobertura global</summary>
+          <div id="coverage" class="panel-body"></div>
+        </details>
+
+        <details class="panel">
+          <summary>Análisis adaptativo</summary>
+          <div id="adaptive-analysis" class="panel-body"></div>
+        </details>
+      </main>
+    </div>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

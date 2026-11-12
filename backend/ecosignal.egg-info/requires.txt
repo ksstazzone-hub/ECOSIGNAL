@@ -1,0 +1,11 @@
+fastapi<1,>=0.115
+httpx<1,>=0.27
+psycopg[binary,pool]<4,>=3.2
+pyproj<4,>=3.7
+shapely<3,>=2.0
+uvicorn[standard]<1,>=0.30
+
+[dev]
+pytest<9,>=8
+pytest-asyncio<2,>=0.24
+ruff<1,>=0.8

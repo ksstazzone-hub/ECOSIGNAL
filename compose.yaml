@@ -1,0 +1,44 @@
+services:
+  database:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: ecosignal
+      POSTGRES_USER: ecosignal
+      POSTGRES_PASSWORD: ecosignal
+    ports:
+      - "5432:5432"
+    volumes:
+      - ecosignal-db:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+      - ./db/seed-case-study.sql:/docker-entrypoint-initdb.d/002-case-study.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecosignal -d ecosignal"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://ecosignal:ecosignal@database:5432/ecosignal
+      CACHE_TTL_SECONDS: "900"
+      DATASET_IMPORT_TOKEN: ${DATASET_IMPORT_TOKEN:-}
+    ports:
+      - "8000:8000"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  worker:
+    build: .
+    command: ["python", "-m", "ecosignal.worker"]
+    environment:
+      DATABASE_URL: postgresql://ecosignal:ecosignal@database:5432/ecosignal
+      CACHE_TTL_SECONDS: "900"
+      WORKER_POLL_SECONDS: "3"
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  ecosignal-db:
